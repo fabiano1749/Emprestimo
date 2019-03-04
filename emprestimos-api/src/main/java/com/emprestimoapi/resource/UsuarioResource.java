@@ -17,31 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Estado;
-import com.emprestimoapi.repository.EstadoRepository;
+import com.emprestimoapi.model.Usuario;
+import com.emprestimoapi.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping("/estados")
-public class EstadoResource{
+@RequestMapping("/usuarios")
+public class UsuarioResource {
 
-	private @Autowired EstadoRepository estadoRepository;
+	private @Autowired UsuarioRepository usuarioRepository;
+	
 	private @Autowired ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Estado> estados(){
-		return  estadoRepository.findAll();
+	public List<Usuario> usuarios(){
+		return usuarioRepository.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Estado> criar(@Valid @RequestBody Estado estado, HttpServletResponse response){
-		Estado estadoSalvo = estadoRepository.save(estado);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, estadoSalvo.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(estadoSalvo);
+	public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario, HttpServletResponse response){
+		Usuario usuarioSalvo = usuarioRepository.save(usuario);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, usuarioSalvo.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Estado> buscarPeloCodigo(@PathVariable Long id){
-		Estado estado = estadoRepository.findOne(id);
-		return estado != null ? ResponseEntity.ok(estado) : ResponseEntity.notFound().build();
+	public ResponseEntity<Usuario> buscarPeloCodigo(@PathVariable Long id){
+		Usuario usuario = usuarioRepository.findOne(id);
+		return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
 	}
 }

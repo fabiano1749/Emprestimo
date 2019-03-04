@@ -7,32 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="estado")
-public class Estado extends AbstractModel{
-
+@Table(name="permissao")
+public class Permissao extends AbstractModel {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
-	@Size(min=6, max=30)
 	private String nome;
 	
-	@NotNull
-	@Size(min=2, max=2)
-	private String sigla;
-
-	public Estado() {
-		
-	}
-	
-	public Estado(String nome, String sigla) {
-		this.nome = nome;
-		this.sigla = sigla;
-	}
+	private String descricao;
 	
 	public Long getId() {
 		return id;
@@ -50,11 +37,11 @@ public class Estado extends AbstractModel{
 		this.nome = nome;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

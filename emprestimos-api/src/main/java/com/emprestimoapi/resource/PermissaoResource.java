@@ -17,31 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Estado;
-import com.emprestimoapi.repository.EstadoRepository;
+import com.emprestimoapi.model.Permissao;
+import com.emprestimoapi.repository.PermissaoRepository;
 
 @RestController
-@RequestMapping("/estados")
-public class EstadoResource{
+@RequestMapping("/permissoes")
+public class PermissaoResource {
 
-	private @Autowired EstadoRepository estadoRepository;
+	private @Autowired PermissaoRepository permissaoRepository;
+	
 	private @Autowired ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Estado> estados(){
-		return  estadoRepository.findAll();
+	public List<Permissao> permissaos(){
+		return permissaoRepository.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Estado> criar(@Valid @RequestBody Estado estado, HttpServletResponse response){
-		Estado estadoSalvo = estadoRepository.save(estado);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, estadoSalvo.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(estadoSalvo);
+	public ResponseEntity<Permissao> criar(@Valid @RequestBody Permissao permissao, HttpServletResponse response){
+		Permissao permissaoSalva = permissaoRepository.save(permissao);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, permissaoSalva.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(permissaoSalva);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Estado> buscarPeloCodigo(@PathVariable Long id){
-		Estado estado = estadoRepository.findOne(id);
-		return estado != null ? ResponseEntity.ok(estado) : ResponseEntity.notFound().build();
+	public ResponseEntity<Permissao> buscarPeloCodigo(@PathVariable Long id){
+		Permissao permissao = permissaoRepository.findOne(id);
+		return permissao != null ? ResponseEntity.ok(permissao) : ResponseEntity.notFound().build();
 	}
 }

@@ -84,7 +84,7 @@ CREATE TABLE contato (
   FOREIGN KEY(id_cliente) REFERENCES cliente(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE caixa(
+CREATE TABLE conta(
   id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL,
   saldo decimal NOT NULL,
@@ -101,10 +101,10 @@ CREATE TABLE operacao(
   valor decimal NOT NULL,
   observacao VARCHAR(200),
   id_usuario bigint(20) NOT NULL,
-  id_caixa bigint(20) NOT NULL,
+  id_conta bigint(20) NOT NULL,
   id_status bigint(20) NOT NULL,
   FOREIGN KEY(id_usuario) REFERENCES usuario(id),
-  FOREIGN KEY(id_caixa) REFERENCES caixa(id),
+  FOREIGN KEY(id_conta) REFERENCES conta(id),
   FOREIGN KEY(id_status) REFERENCES status(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

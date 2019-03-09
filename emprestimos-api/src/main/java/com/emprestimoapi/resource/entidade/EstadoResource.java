@@ -1,4 +1,4 @@
-package com.emprestimoapi.resource;
+package com.emprestimoapi.resource.entidade;
 
 
 import java.util.List;

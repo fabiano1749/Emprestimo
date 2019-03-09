@@ -18,7 +18,7 @@ import com.emprestimoapi.model.entidade.Usuario;
 
 @Entity
 @Table(name = "caixa")
-public class Caixa {
+public class Conta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

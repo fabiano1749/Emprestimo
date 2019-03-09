@@ -46,7 +46,7 @@ public class Operacao {
 	
 	@ManyToOne
 	@JoinColumn(name="id_caixa")
-	private Caixa caixa;
+	private Conta caixa;
 	
 	@ManyToOne
 	@JoinColumn(name="id_status")
@@ -100,11 +100,11 @@ public class Operacao {
 		this.usuario = usuario;
 	}
 
-	public Caixa getCaixa() {
+	public Conta getCaixa() {
 		return caixa;
 	}
 
-	public void setCaixa(Caixa caixa) {
+	public void setCaixa(Conta caixa) {
 		this.caixa = caixa;
 	}
 

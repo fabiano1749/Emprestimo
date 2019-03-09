@@ -1,4 +1,4 @@
-package com.emprestimoapi.resource;
+package com.emprestimoapi.resource.operacao;
 
 import java.util.List;
 
@@ -17,32 +17,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.entidade.Cidade;
-import com.emprestimoapi.repository.Entidade.CidadeRepository;
+import com.emprestimoapi.model.operacao.Conta;
+import com.emprestimoapi.repository.operacao.ContaRepository;
 
 @RestController
-@RequestMapping("/cidades")
-public class CidadeResource {
+@RequestMapping("/contas")
+public class ContaResource {
 
-	private @Autowired CidadeRepository cidadeRepository;
-	
+	private @Autowired ContaRepository contaRepository;
 	private @Autowired ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Cidade> cidades(){
-		return cidadeRepository.findAll();
+	public List<Conta> contas(){
+		return contaRepository.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cidade> criar(@Valid @RequestBody Cidade cidade, HttpServletResponse response){
-		Cidade cidadeSalva = cidadeRepository.save(cidade);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, cidadeSalva.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(cidadeSalva);
+	public ResponseEntity<Conta> criar(@Valid @RequestBody Conta conta, HttpServletResponse response){
+		Conta contaSalva = contaRepository.save(conta);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, contaSalva.getId()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(contaSalva);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Cidade> buscarPeloCodigo(@PathVariable Long id){
-		Cidade cidade = cidadeRepository.findOne(id);
-		return cidade != null ? ResponseEntity.ok(cidade) : ResponseEntity.notFound().build();
+	public ResponseEntity<Conta> buscarPeloCodigo(@PathVariable Long id){
+		Conta conta = contaRepository.findOne(id);
+		return conta != null ? ResponseEntity.ok(conta) : ResponseEntity.notFound().build();
 	}
 }

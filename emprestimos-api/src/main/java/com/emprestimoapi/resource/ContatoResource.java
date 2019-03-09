@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Contato;
-import com.emprestimoapi.repository.ContatoRepository;
+import com.emprestimoapi.model.entidade.Contato;
+import com.emprestimoapi.repository.Entidade.ContatoRepository;
 
 @RestController
 @RequestMapping("/contatos")

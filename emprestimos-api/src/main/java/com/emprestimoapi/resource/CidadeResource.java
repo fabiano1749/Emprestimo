@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Cidade;
-import com.emprestimoapi.repository.CidadeRepository;
+import com.emprestimoapi.model.entidade.Cidade;
+import com.emprestimoapi.repository.Entidade.CidadeRepository;
 
 @RestController
 @RequestMapping("/cidades")

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Permissao;
-import com.emprestimoapi.repository.PermissaoRepository;
+import com.emprestimoapi.model.entidade.Permissao;
+import com.emprestimoapi.repository.Entidade.PermissaoRepository;
 
 @RestController
 @RequestMapping("/permissoes")

@@ -1,4 +1,4 @@
-package com.emprestimoapi.model;
+package com.emprestimoapi.model.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="endereco")
-public class Endereco extends AbstractModel {
+public class Endereco extends EntidadeBase {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

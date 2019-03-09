@@ -1,4 +1,4 @@
-package com.emprestimoapi.model;
+package com.emprestimoapi.model.entidade;
 
 public enum TipoContato {
 	PESSOAL("Pessoal"),

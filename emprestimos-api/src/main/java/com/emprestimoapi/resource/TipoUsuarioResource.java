@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.TipoUsuario;
-import com.emprestimoapi.repository.TipoUsuarioRepository;
+import com.emprestimoapi.model.entidade.TipoUsuario;
+import com.emprestimoapi.repository.Entidade.TipoUsuarioRepository;
 
 @RestController
 @RequestMapping("/tipoUsuarios")

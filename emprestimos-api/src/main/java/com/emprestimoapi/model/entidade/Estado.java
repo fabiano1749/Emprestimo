@@ -1,5 +1,4 @@
-package com.emprestimoapi.model;
-
+package com.emprestimoapi.model.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,12 +10,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="estado")
-public class Estado extends AbstractModel{
-
+public class Estado extends EntidadeBase{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
 	@Size(min=6, max=30)
 	private String nome;
@@ -41,7 +40,7 @@ public class Estado extends AbstractModel{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}

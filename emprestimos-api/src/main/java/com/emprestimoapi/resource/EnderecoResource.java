@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Endereco;
-import com.emprestimoapi.repository.EnderecoRepository;
+import com.emprestimoapi.model.entidade.Endereco;
+import com.emprestimoapi.repository.Entidade.EnderecoRepository;
 
 @RestController
 @RequestMapping("/enderecos")

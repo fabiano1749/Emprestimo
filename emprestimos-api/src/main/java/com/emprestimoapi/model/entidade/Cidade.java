@@ -1,4 +1,4 @@
-package com.emprestimoapi.model;
+package com.emprestimoapi.model.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,24 +8,34 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="usuario")
-public class Usuario extends AbstractModel{
+@Table(name="cidade")
+public class Cidade extends EntidadeBase{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
+	@Size(min=5, max=50)
 	private String nome;
 	
-	private String telefone;
-	
 	@ManyToOne
-	@JoinColumn(name="id_tipo_usuario")
-	private TipoUsuario tipo;
-
+	@JoinColumn(name="id_estado")
+	private Estado estado;
+	
+	public Cidade() {
+		
+	}
+	
+	public Cidade(String nome, Estado estado) {
+		super();
+		this.nome = nome;
+		this.estado = estado;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -42,20 +52,12 @@ public class Usuario extends AbstractModel{
 		this.nome = nome;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public TipoUsuario getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 }

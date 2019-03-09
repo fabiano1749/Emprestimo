@@ -1,4 +1,4 @@
-package com.emprestimoapi.model;
+package com.emprestimoapi.model.entidade;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="cliente")
-public class Cliente extends AbstractModel{
+public class Cliente extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,6 +33,10 @@ public class Cliente extends AbstractModel{
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 
+	@ManyToOne
+	@JoinColumn(name = "id_status")
+	private Status status;
+	
 	public Long getId() {
 		return id;
 	}
@@ -79,6 +83,14 @@ public class Cliente extends AbstractModel{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }

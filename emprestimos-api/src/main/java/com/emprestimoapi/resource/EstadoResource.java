@@ -1,5 +1,6 @@
 package com.emprestimoapi.resource;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.Estado;
-import com.emprestimoapi.repository.EstadoRepository;
+import com.emprestimoapi.model.entidade.Estado;
+import com.emprestimoapi.repository.Entidade.EstadoRepository;
 
 @RestController
 @RequestMapping("/estados")

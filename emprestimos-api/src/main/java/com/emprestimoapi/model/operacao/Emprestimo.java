@@ -14,10 +14,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.emprestimoapi.model.entidade.Cliente;
+import com.emprestimoapi.model.entidade.EntidadeBase;
 
 @Entity
 @Table(name ="emprestimo")
-public class Emprestimo {
+public class Emprestimo extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

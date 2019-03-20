@@ -1,9 +1,9 @@
 package com.emprestimoapi.repository.operacao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emprestimoapi.model.operacao.Emprestimo;
+import com.emprestimoapi.repository.Entidade.BaseRepository;
 
-public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long>{
+public interface EmprestimoRepository extends BaseRepository<Emprestimo, Long>{
 
 }

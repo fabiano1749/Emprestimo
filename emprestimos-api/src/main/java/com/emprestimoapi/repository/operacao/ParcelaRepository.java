@@ -1,9 +1,9 @@
 package com.emprestimoapi.repository.operacao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emprestimoapi.model.operacao.Parcela;
+import com.emprestimoapi.repository.Entidade.BaseRepository;
 
-public interface ParcelaRepository extends JpaRepository<Parcela, Long>{
+public interface ParcelaRepository extends BaseRepository<Parcela, Long>{
 
 }

@@ -1,9 +1,9 @@
 package com.emprestimoapi.repository.operacao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emprestimoapi.model.operacao.TipoEntrada;
+import com.emprestimoapi.repository.Entidade.BaseRepository;
 
-public interface TipoEntradaRepository extends JpaRepository<TipoEntrada, Long>{
+public interface TipoEntradaRepository extends BaseRepository<TipoEntrada, Long>{
 
 }

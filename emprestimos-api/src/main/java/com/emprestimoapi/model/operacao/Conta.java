@@ -13,12 +13,13 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
 
 @Entity
 @Table(name = "caixa")
-public class Conta {
+public class Conta extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,9 +1,9 @@
 package com.emprestimoapi.repository.operacao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emprestimoapi.model.operacao.TipoRetirada;
+import com.emprestimoapi.repository.Entidade.BaseRepository;
 
-public interface TipoRetiradaRepository extends JpaRepository<TipoRetirada, Long>{
+public interface TipoRetiradaRepository extends BaseRepository<TipoRetirada, Long>{
 
 }

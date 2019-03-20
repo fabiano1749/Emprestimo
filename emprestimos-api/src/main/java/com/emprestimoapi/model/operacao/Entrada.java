@@ -9,9 +9,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.emprestimoapi.model.entidade.EntidadeBase;
+
 @Entity
 @Table(name = "entrada")
-public class Entrada {
+public class Entrada extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

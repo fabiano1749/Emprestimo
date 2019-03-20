@@ -8,10 +8,12 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.emprestimoapi.model.entidade.EntidadeBase;
+
 
 @Entity
 @Table(name = "tipo_entrada")
-public class TipoEntrada {
+public class TipoEntrada extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

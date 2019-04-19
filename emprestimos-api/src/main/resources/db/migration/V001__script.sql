@@ -43,6 +43,8 @@ CREATE TABLE usuario (
   id bigint(20) PRIMARY KEY AUTO_INCREMENT,
   nome varchar(50) NOT NULL,
   telefone varchar(15),
+  email varchar(70) NOT NULL,
+  senha varchar (200) NOT NULL,	
   id_status bigint(20) NOT NULL,	
   id_tipo_usuario bigint(20) NOT NULL,  
   FOREIGN KEY(id_status) REFERENCES status(id),	

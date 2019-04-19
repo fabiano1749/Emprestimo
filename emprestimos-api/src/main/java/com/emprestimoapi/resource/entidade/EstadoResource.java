@@ -22,20 +22,6 @@ public class EstadoResource extends BaseResource<Estado>{
 	private @Autowired EstadoRepository estadoRepository;
 	private @Autowired EstadoService estadoService;
 	
-
-//	@PostMapping
-//	public ResponseEntity<Estado> criar(@Valid @RequestBody Estado estado, HttpServletResponse response){
-//		Estado estadoSalvo = estadoRepository.save(estado);
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, estadoSalvo.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(estadoSalvo);
-//	}
-	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<Estado> buscarPeloCodigo(@PathVariable Long id){
-//		Estado estado = estadoRepository.findOne(id);
-//		return estado != null ? ResponseEntity.ok(estado) : ResponseEntity.notFound().build();
-//	}
-//	
 	@PutMapping("/{id}")
 	public ResponseEntity<Estado> atualizar(@PathVariable Long id, @Valid @RequestBody Estado estado){
 		return ResponseEntity.ok(estadoService.atualizar(id, estado));

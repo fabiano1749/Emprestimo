@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
@@ -33,8 +31,7 @@ public class Estado extends EntidadeBase{
 	private String sigla;
 
 	@Valid
-	@OneToMany(mappedBy="estado", cascade = CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
-	@Transient
+	@OneToMany(mappedBy="estado", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Cidade> cidades;
 	
 	public Estado() {

@@ -2,12 +2,13 @@ package com.emprestimoapi.model.entidade;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,7 +27,9 @@ public class TipoUsuario extends EntidadeBase{
 	
 	private String descricao;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "permissao_tipo_usuario", joinColumns = @JoinColumn(name = "id_tipo_usuario"), 
+												inverseJoinColumns = @JoinColumn(name = "id_permissao"))
 	private List<Permissao> permissoes;
 	
 	@ManyToOne

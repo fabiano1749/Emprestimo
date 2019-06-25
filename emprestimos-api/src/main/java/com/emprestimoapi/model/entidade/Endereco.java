@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="endereco")
 public class Endereco extends EntidadeBase {
@@ -31,6 +33,8 @@ public class Endereco extends EntidadeBase {
 	@NotNull
 	private String numero;
 	
+	private String complemento;
+	
 	@NotNull
 	private String bairro;
 	
@@ -38,6 +42,7 @@ public class Endereco extends EntidadeBase {
 	@JoinColumn(name="id_cidade")
 	private Cidade cidade;
 
+	@JsonIgnoreProperties("enderecos")
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
@@ -80,6 +85,14 @@ public class Endereco extends EntidadeBase {
 
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+	
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
 	public String getBairro() {

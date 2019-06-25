@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="contato")
 public class Contato extends EntidadeBase{
@@ -29,6 +31,7 @@ public class Contato extends EntidadeBase{
 	
 	private String celular;
 	
+	@JsonIgnoreProperties("contatos")
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
 	private Cliente cliente;

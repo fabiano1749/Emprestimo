@@ -8,34 +8,23 @@ import com.emprestimoapi.model.operacao.Entrada;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
 import com.emprestimoapi.repository.operacao.EntradaRepository;
 import com.emprestimoapi.resource.entidade.BaseResource;
+import com.emprestimoapi.service.entidade.BaseService;
+import com.emprestimoapi.service.operacao.EntradaService;
 
 @RestController
 @RequestMapping("/entradas")
 public class EntradaResource extends BaseResource<Entrada>{
 
 	private @Autowired EntradaRepository entradaRepository;
-//	private @Autowired ApplicationEventPublisher publisher;
-//	
-//	@GetMapping
-//	public List<Entrada> entradas(){
-//		return entradaRepository.findAll();
-//	}
-//	
-//	@PostMapping
-//	public ResponseEntity<Entrada> criar(@Valid @RequestBody Entrada entrada, HttpServletResponse response){
-//		Entrada entradaSalva = entradaRepository.save(entrada);
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, entradaSalva.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(entradaSalva);
-//	}
-//	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<Entrada> buscarPeloCodigo(@PathVariable Long id){
-//		Entrada entrada = entradaRepository.findOne(id);
-//		return entrada != null ? ResponseEntity.ok(entrada) : ResponseEntity.notFound().build();
-//	}
+	private @Autowired EntradaService service;
 
 	@Override
 	public BaseRepository<Entrada, Long> repository() {
 		return entradaRepository;
+	}
+
+	@Override
+	public BaseService<Entrada> service() {
+		return service;
 	}
 }

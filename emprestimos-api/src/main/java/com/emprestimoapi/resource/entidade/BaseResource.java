@@ -10,15 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
+import com.emprestimoapi.service.entidade.BaseService;
 
 @RestController
 public abstract class BaseResource <T extends EntidadeBase>{
@@ -26,6 +30,8 @@ public abstract class BaseResource <T extends EntidadeBase>{
 	private @Autowired ApplicationEventPublisher publisher;
 
 	public abstract BaseRepository<T, Long> repository();
+	
+	public abstract BaseService<T> service();
 	
 	@GetMapping
 	public List<T> entidades(){
@@ -45,9 +51,19 @@ public abstract class BaseResource <T extends EntidadeBase>{
 		return entidade != null ? ResponseEntity.ok(entidade) : ResponseEntity.notFound().build();
 	}	
 	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<T> atualizar(@PathVariable Long id, @Valid @RequestBody T entidade){
-//		return ResponseEntity.ok(estadoService.atualizar(id, entidade));
-//	}
+	@PutMapping("/{id}")
+	public ResponseEntity<T> atualizar(@PathVariable Long id, @Valid @RequestBody T entidade){
+		return ResponseEntity.ok(service().atualizar(id, entidade));
+	}
+	
+	@DeleteMapping("{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(@PathVariable Long id){
+		repository().delete(id);
+	}
+
+	public ApplicationEventPublisher getPublisher() {
+		return publisher;
+	}
 	
 }

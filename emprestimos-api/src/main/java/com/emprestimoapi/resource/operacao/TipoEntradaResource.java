@@ -7,34 +7,23 @@ import com.emprestimoapi.model.operacao.TipoEntrada;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
 import com.emprestimoapi.repository.operacao.TipoEntradaRepository;
 import com.emprestimoapi.resource.entidade.BaseResource;
+import com.emprestimoapi.service.entidade.BaseService;
+import com.emprestimoapi.service.operacao.TipoEntradaService;
 
 @RestController
 @RequestMapping("/tiposEntradas")
 public class TipoEntradaResource extends BaseResource<TipoEntrada>{
 
 	private @Autowired TipoEntradaRepository tipoEntradaRepository;
-//	private @Autowired ApplicationEventPublisher publisher;
-//	
-//	@GetMapping
-//	public List<TipoEntrada> tiposEntradas(){
-//		return tipoEntradaRepository.findAll();
-//	}
-//	
-//	@PostMapping
-//	public ResponseEntity<TipoEntrada> criar(@Valid @RequestBody TipoEntrada tipoEntrada, HttpServletResponse response){
-//		TipoEntrada tipoEntradaSalva = tipoEntradaRepository.save(tipoEntrada);
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, tipoEntradaSalva.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(tipoEntradaSalva);
-//	}
-//	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<TipoEntrada> buscarPeloCodigo(@PathVariable Long id){
-//		TipoEntrada tipoEntrada = tipoEntradaRepository.findOne(id);
-//		return tipoEntrada != null ? ResponseEntity.ok(tipoEntrada) : ResponseEntity.notFound().build();
-//	}
+	private @Autowired TipoEntradaService service;
 
 	@Override
 	public BaseRepository<TipoEntrada, Long> repository() {
 		return tipoEntradaRepository;
+	}
+
+	@Override
+	public BaseService<TipoEntrada> service() {
+		return service;
 	}
 }

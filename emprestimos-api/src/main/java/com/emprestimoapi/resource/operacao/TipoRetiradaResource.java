@@ -7,34 +7,23 @@ import com.emprestimoapi.model.operacao.TipoRetirada;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
 import com.emprestimoapi.repository.operacao.TipoRetiradaRepository;
 import com.emprestimoapi.resource.entidade.BaseResource;
+import com.emprestimoapi.service.entidade.BaseService;
+import com.emprestimoapi.service.operacao.TipoRetiradaService;
 
 @RestController
 @RequestMapping("/tiposRetiradas")
 public class TipoRetiradaResource extends BaseResource<TipoRetirada>{
 
 	private @Autowired TipoRetiradaRepository tipoRetiradaRepository;
-//	private @Autowired ApplicationEventPublisher publisher;
-//	
-//	@GetMapping
-//	public List<TipoRetirada> tiposRetiradas(){
-//		return tipoRetiradaRepository.findAll();
-//	}
-//	
-//	@PostMapping
-//	public ResponseEntity<TipoRetirada> criar(@Valid @RequestBody TipoRetirada tipoRetirada, HttpServletResponse response){
-//		TipoRetirada tipoRetiradaSalva = tipoRetiradaRepository.save(tipoRetirada);
-//		publisher.publishEvent(new RecursoCriadoEvent(this, response, tipoRetiradaSalva.getId()));
-//		return ResponseEntity.status(HttpStatus.CREATED).body(tipoRetiradaSalva);
-//	}
-//	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<TipoRetirada> buscarPeloCodigo(@PathVariable Long id){
-//		TipoRetirada tipoRetirada = tipoRetiradaRepository.findOne(id);
-//		return tipoRetirada != null ? ResponseEntity.ok(tipoRetirada) : ResponseEntity.notFound().build();
-//	}
+	private @Autowired TipoRetiradaService service;
 
 	@Override
 	public BaseRepository<TipoRetirada, Long> repository() {
 		return tipoRetiradaRepository;
+	}
+
+	@Override
+	public BaseService<TipoRetirada> service() {
+		return service;
 	}
 }

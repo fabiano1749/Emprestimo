@@ -14,6 +14,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="estado")
 public class Estado extends EntidadeBase{
@@ -30,8 +32,9 @@ public class Estado extends EntidadeBase{
 	@Size(min=2, max=2)
 	private String sigla;
 
+	@JsonIgnoreProperties("estado")
 	@Valid
-	@OneToMany(mappedBy="estado", cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy= "estado", cascade = CascadeType.ALL)
 	private List<Cidade> cidades;
 	
 	public Estado() {

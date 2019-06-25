@@ -1,7 +1,10 @@
 package com.emprestimoapi.model.operacao;
 
-import java.math.BigDecimal;
 
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,12 +31,13 @@ public class Conta extends EntidadeBase{
 	@NotBlank
 	private String nome;
 	
+	@NotNull
+	@Column(name="saldo_inicial")
+	private Double saldoInicial;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario administrador;
-	
-	@NotNull
-	private BigDecimal saldo;
 	
 	@NotNull
 	@ManyToOne
@@ -55,6 +59,14 @@ public class Conta extends EntidadeBase{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public Double getSaldoInicial() {
+		return saldoInicial;
+	}
+
+	public void setSaldoInicial(Double saldoInicial) {
+		this.saldoInicial = saldoInicial;
+	}
 
 	public Usuario getAdministrador() {
 		return administrador;
@@ -62,14 +74,6 @@ public class Conta extends EntidadeBase{
 
 	public void setAdministrador(Usuario administrador) {
 		this.administrador = administrador;
-	}
-
-	public BigDecimal getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(BigDecimal saldo) {
-		this.saldo = saldo;
 	}
 
 	public Status getStatus() {
@@ -80,4 +84,8 @@ public class Conta extends EntidadeBase{
 		this.status = status;
 	}
 	
+	public static List<Status> statusUsados() {
+		List<Status> status = Arrays.asList(Status.ATIVO, Status.INATIVO);
+		return status;
+	}
 }

@@ -21,7 +21,7 @@ import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
 
 @Entity
-@Table(name = "caixa")
+@Table(name = "conta")
 public class Conta extends EntidadeBase{
 
 	@Id

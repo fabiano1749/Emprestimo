@@ -44,8 +44,8 @@ public class Endereco extends EntidadeBase {
 
 	@JsonIgnoreProperties("enderecos")
 	@ManyToOne
-	@JoinColumn(name = "id_cliente")
-	private Cliente cliente;
+	@JoinColumn(name = "id_entidade")
+	private Entidade entidade;
 	
 	public Long getId() {
 		return id;
@@ -111,11 +111,12 @@ public class Endereco extends EntidadeBase {
 		this.cidade = cidade;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Entidade getEntidade() {
+		return entidade;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setEntidade(Entidade entidade) {
+		this.entidade = entidade;
 	}
+
 }

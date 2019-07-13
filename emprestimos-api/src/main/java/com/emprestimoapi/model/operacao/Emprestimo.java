@@ -1,28 +1,26 @@
 package com.emprestimoapi.model.operacao;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.emprestimoapi.model.entidade.Cliente;
-import com.emprestimoapi.model.entidade.EntidadeBase;
+import com.emprestimoapi.model.entidade.Status;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name ="emprestimo")
-public class Emprestimo extends EntidadeBase{
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+@DiscriminatorValue("emprestimo")
+public class Emprestimo extends Operacao{
 	
 	@NotNull
 	@Column(name = "juros_valor")
@@ -44,18 +42,12 @@ public class Emprestimo extends EntidadeBase{
 	@JoinColumn(name="id_cliente")
 	private Cliente cliente;
 
-	@OneToOne
-	@JoinColumn(name="id_operacao")
-	private Operacao operacao;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	@JsonIgnoreProperties("emprestimo")
+	@Valid
+	@OneToMany(mappedBy= "emprestimo", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Parcela> parcelas;
+	
+	
 	public BigDecimal getJurosValor() {
 		return jurosValor;
 	}
@@ -95,13 +87,17 @@ public class Emprestimo extends EntidadeBase{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
-	public Operacao getOperacao() {
-		return operacao;
-	}
-
-	public void setOperacao(Operacao operacao) {
-		this.operacao = operacao;
-	}
 	
+	public List<Parcela> getParcelas() {
+		return parcelas;
+	}
+
+	public void setParcelas(List<Parcela> parcelas) {
+		this.parcelas = parcelas;
+	}
+
+	public static List<Status> statusUsados() {
+		List<Status> status = Arrays.asList(Status.ABERTO, Status.EM_ANDAMENTO, Status.CANCELADO, Status.FECHADO);
+		return status;
+	}
 }

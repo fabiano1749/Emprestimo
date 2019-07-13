@@ -41,19 +41,19 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery{
 		}
 		
 		if(filtro.getCidade() != null) {
-			predicates.add(builder.equal(root.get("cidade"), filtro.getCidade()));
+			predicates.add(builder.equal(root.get("cidade").get("nome"), filtro.getCidade()));
 		}
 		
 		if(filtro.getEstado() != null) {
-			predicates.add(builder.equal(root.get("estado"), filtro.getEstado()));
+			predicates.add(builder.equal(root.get("cidade").get("estado").get("nome"), filtro.getEstado()));
 		}
 		
 		if(filtro.getStatus() != null) {
-			predicates.add(builder.equal(root.get("status"), filtro.getStatus()));
+			predicates.add(builder.equal(root.get("status").get("nome"), filtro.getStatus()));
 		}
 		
 		if(filtro.getUsuario() != null) {
-			predicates.add(builder.equal(root.get("usuario"), filtro.getUsuario()));
+			predicates.add(builder.equal(root.get("usuario").get("nome"), filtro.getUsuario()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

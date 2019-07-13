@@ -1,79 +1,45 @@
 package com.emprestimoapi.model.entidade;
 
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="usuario")
-public class Usuario extends EntidadeBase{
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull
-	private String nome;
-	
-	private String telefone;
-	
+@Entity
+@DiscriminatorValue("usuario")
+public class Usuario extends Entidade{
+		
 	@NotNull
 	private String senha;
 	
 	@NotNull
-	private String email;
+	private String username;
 	
 	@ManyToOne
 	@JoinColumn(name="id_tipo_usuario")
 	private TipoUsuario tipo;
-
-	@ManyToOne
-	@JoinColumn(name = "id_status")
-	private Status status;
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
+	@JsonIgnoreProperties("usuario")
+	@Valid
+	@OneToMany(mappedBy= "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Cliente> clientes;
+	
+	
 	public TipoUsuario getTipo() {
 		return tipo;
 	}
 
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	public String getSenha() {
@@ -83,13 +49,25 @@ public class Usuario extends EntidadeBase{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	public String getEmail() {
-		return email;
+	
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public static List<Status> statusUsados() {
+		List<Status> status = Arrays.asList(Status.ATIVO, Status.INATIVO);
+		return status;
+	}
 }

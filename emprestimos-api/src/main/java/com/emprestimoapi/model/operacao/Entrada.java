@@ -1,54 +1,25 @@
 package com.emprestimoapi.model.operacao;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-import com.emprestimoapi.model.entidade.EntidadeBase;
 
 @Entity
-@Table(name = "entrada")
-public class Entrada extends EntidadeBase{
+@DiscriminatorValue("entrada")
+public class Entrada extends Operacao{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
 	@ManyToOne
-	@JoinColumn(name="id_tipo")
-	private TipoEntrada tipo;
-	
-	@OneToOne
-	@JoinColumn(name="id_operacao")
-	private Operacao operacao;
+	@JoinColumn(name="id_motivo_operacao")
+	private TipoEntrada motivoOperacao;
 
-	public Long getId() {
-		return id;
+	public TipoEntrada getMotivoOperacao() {
+		return motivoOperacao;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public TipoEntrada getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoEntrada tipo) {
-		this.tipo = tipo;
-	}
-
-	public Operacao getOperacao() {
-		return operacao;
-	}
-
-	public void setOperacao(Operacao operacao) {
-		this.operacao = operacao;
+	public void setMotivoOperacao(TipoEntrada motivoOperacao) {
+		this.motivoOperacao = motivoOperacao;
 	}
 	
 }

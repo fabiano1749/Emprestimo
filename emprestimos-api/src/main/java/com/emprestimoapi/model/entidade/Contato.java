@@ -33,8 +33,8 @@ public class Contato extends EntidadeBase{
 	
 	@JsonIgnoreProperties("contatos")
 	@ManyToOne
-	@JoinColumn(name="id_cliente")
-	private Cliente cliente;
+	@JoinColumn(name="id_entidade")
+	private Entidade entidade;
 
 	public Long getId() {
 		return id;
@@ -76,11 +76,12 @@ public class Contato extends EntidadeBase{
 		this.celular = celular;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Entidade getEntidade() {
+		return entidade;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setEntidade(Entidade entidade) {
+		this.entidade = entidade;
 	}
+	
 }

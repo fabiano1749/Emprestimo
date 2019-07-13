@@ -1,20 +1,22 @@
 package com.emprestimoapi.model.operacao;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.emprestimoapi.model.entidade.EntidadeBase;
@@ -22,19 +24,20 @@ import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
 @Table(name="operacao")
-public class Operacao extends EntidadeBase{
+public abstract class Operacao extends EntidadeBase{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-    @Enumerated(EnumType.STRING)
-	private TipoOperacao tipo;
-	
     @Column(name="data_reg")
-    @Temporal(TemporalType.DATE)
-	private Date dataRegistro;
+	private LocalDate dataRegistro;
+    
+    @Column(name="data_operacao")
+	private LocalDate dataOperacao;
 	
     @NotNull
 	private BigDecimal valor;
@@ -46,13 +49,18 @@ public class Operacao extends EntidadeBase{
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JoinColumn(name="id_caixa")
-	private Conta caixa;
+	@JoinColumn(name="id_conta")
+	private Conta conta;
 	
 	@ManyToOne
 	@JoinColumn(name="id_status")
 	private Status status;
 
+	public Operacao() {
+		dataRegistro = LocalDate.now();
+		setStatus(Status.ABERTO);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -61,20 +69,20 @@ public class Operacao extends EntidadeBase{
 		this.id = id;
 	}
 
-	public TipoOperacao getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoOperacao tipo) {
-		this.tipo = tipo;
-	}
-
-	public Date getDataRegistro() {
+	public LocalDate getDataRegistro() {
 		return dataRegistro;
 	}
 
-	public void setDataRegistro(Date dataRegistro) {
+	public void setDataRegistro(LocalDate dataRegistro) {
 		this.dataRegistro = dataRegistro;
+	}
+	
+	public LocalDate getDataOperacao() {
+		return dataOperacao;
+	}
+
+	public void setDataOperacao(LocalDate dataOperacao) {
+		this.dataOperacao = dataOperacao;
 	}
 
 	public BigDecimal getValor() {
@@ -101,12 +109,12 @@ public class Operacao extends EntidadeBase{
 		this.usuario = usuario;
 	}
 
-	public Conta getCaixa() {
-		return caixa;
+	public Conta getConta() {
+		return conta;
 	}
 
-	public void setCaixa(Conta caixa) {
-		this.caixa = caixa;
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 	public Status getStatus() {
@@ -117,4 +125,8 @@ public class Operacao extends EntidadeBase{
 		this.status = status;
 	}
 	
+	public static List<Status> statusUsados() {
+		List<Status> status = Arrays.asList(Status.ABERTO, Status.AUTORIZADO, Status.CANCELADO, Status.FECHADO);
+		return status;
+	}
 }

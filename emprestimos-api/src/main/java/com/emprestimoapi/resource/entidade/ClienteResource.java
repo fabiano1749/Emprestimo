@@ -31,7 +31,6 @@ public class ClienteResource extends BaseResource<Cliente>{
 	private @Autowired ClienteRepository clienteRepository;
 	private @Autowired ClienteService service;
 	
-
 	@PostMapping
 	public ResponseEntity<Cliente> criar(@Valid @RequestBody Cliente entidade, HttpServletResponse response){
 		Cliente entidadeSalva = service.salvar(entidade);
@@ -54,8 +53,8 @@ public class ClienteResource extends BaseResource<Cliente>{
 		return Cliente.statusUsados();
 	}
 	
+	@GetMapping("pesquisa")
 	public List<Cliente> pesquisar(ClienteFilter filtro) {
 		return clienteRepository.filtrar(filtro);
 	}
-	
 }

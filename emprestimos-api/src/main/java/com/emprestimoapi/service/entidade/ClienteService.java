@@ -19,8 +19,8 @@ public class ClienteService extends BaseService<Cliente>{
 			return atualizar(cliente.getId(), cliente);
 		}
 		
-		cliente.getEnderecos().forEach(e -> e.setCliente(cliente));
-		cliente.getContatos().forEach(c -> c.setCliente(cliente));
+		cliente.getEnderecos().forEach(e -> e.setEntidade(cliente));
+		cliente.getContatos().forEach(c -> c.setEntidade(cliente));
 		return clienteRepository.save(cliente);	
 	}
 	
@@ -31,11 +31,11 @@ public class ClienteService extends BaseService<Cliente>{
 		}
 		clienteSalvo.getEnderecos().clear();
 		clienteSalvo.getEnderecos().addAll(entidade.getEnderecos());
-		clienteSalvo.getEnderecos().forEach(e -> e.setCliente(clienteSalvo));
+		clienteSalvo.getEnderecos().forEach(e -> e.setEntidade(clienteSalvo));
 		
 		clienteSalvo.getContatos().clear();
 		clienteSalvo.getContatos().addAll(entidade.getContatos());
-		clienteSalvo.getContatos().forEach(c -> c.setCliente(clienteSalvo));
+		clienteSalvo.getContatos().forEach(c -> c.setEntidade(clienteSalvo));
 		
 		BeanUtils.copyProperties(entidade, clienteSalvo, "id", "enderecos", "contatos");
 		return repository().save(clienteSalvo);

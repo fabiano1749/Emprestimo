@@ -7,6 +7,6 @@ import com.emprestimoapi.model.entidade.Usuario;
 
 public interface UsuarioRepository extends BaseRepository<Usuario, Long> {
 
-	public Optional<Usuario> findByEmail(String email);
+	public Optional<Usuario> findByUsername(String username);
 	
 }

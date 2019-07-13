@@ -1,7 +1,9 @@
 package com.emprestimoapi.model.operacao;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Status;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="parcela")
@@ -33,19 +33,17 @@ public class Parcela extends EntidadeBase{
 	@Column(name="valor_previsto")
 	private BigDecimal valorPrevisto;
 	
-	@NotNull
+	
 	@Column(name="valor_recebido")
 	private BigDecimal valorRecebido;
 	
-	@NotBlank
 	private int numero;
 	
-	@Temporal(TemporalType.DATE)
-	private Date vencimento;
+	private LocalDate  vencimento;
 	
-	@Temporal(TemporalType.DATE)
-	private Date recebimento;
+	private LocalDate  recebimento;
 	
+	@JsonIgnoreProperties("parcelas")
 	@ManyToOne
 	@JoinColumn(name="id_emprestimo")
 	private Emprestimo emprestimo;
@@ -59,7 +57,7 @@ public class Parcela extends EntidadeBase{
 	private Status status;
 
 	public String observacao;
-	
+		
 	public Long getId() {
 		return id;
 	}
@@ -92,19 +90,19 @@ public class Parcela extends EntidadeBase{
 		this.numero = numero;
 	}
 
-	public Date getVencimento() {
+	public LocalDate getVencimento() {
 		return vencimento;
 	}
 
-	public void setVencimento(Date vencimento) {
+	public void setVencimento(LocalDate vencimento) {
 		this.vencimento = vencimento;
 	}
 
-	public Date getRecebimento() {
+	public LocalDate getRecebimento() {
 		return recebimento;
 	}
 
-	public void setRecebimento(Date recebimento) {
+	public void setRecebimento(LocalDate recebimento) {
 		this.recebimento = recebimento;
 	}
 
@@ -138,6 +136,11 @@ public class Parcela extends EntidadeBase{
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	
+	public static List<Status> statusUsados() {
+		List<Status> status = Arrays.asList(Status.ABERTO, Status.CANCELADO, Status.FECHADO, Status.RENEGOCIADO);
+		return status;
 	}
 	
 }

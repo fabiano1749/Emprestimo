@@ -2,6 +2,7 @@ package com.emprestimoapi.model.entidade;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,7 +49,7 @@ public abstract class Entidade extends EntidadeBase{
 	@JsonIgnoreProperties("entidade")
 	@Valid
 	@OneToMany(mappedBy= "entidade", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Endereco> enderecos;
+	public List<Endereco> enderecos;
 	
 	@JsonIgnoreProperties("entidade")
 	@Valid
@@ -127,4 +128,12 @@ public abstract class Entidade extends EntidadeBase{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public boolean possuiEnderecoComercial() {
+		if(getEnderecos() != null && !getEnderecos().isEmpty()) {
+			return !getEnderecos().stream().filter(e -> e.getTipo().equals(TipoEndereco.COMERCIAL)).collect(Collectors.toList()).isEmpty();
+		}
+		return false;
+	}
+	
 }

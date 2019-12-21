@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -82,6 +85,18 @@ public class Contato extends EntidadeBase{
 
 	public void setEntidade(Entidade entidade) {
 		this.entidade = entidade;
+	}
+	
+	@Transient
+	public String resumo() {
+		String contato = getTipo().toString();
+		if(!StringUtils.isBlank(getCelular())) {
+			contato = contato + getCelular() + " , ";
+		}
+		if(!StringUtils.isBlank(getFixo())) {
+			contato = contato + getFixo();
+		}
+		return contato;
 	}
 	
 }

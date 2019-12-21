@@ -15,7 +15,7 @@ public class EstadoService extends BaseService<Estado>{
 	private @Autowired EstadoRepository estadoRepository;
 
 	public Estado atualizar(Long id, Estado entidade) {
-		Estado entidadeSalva = repository().findOne(id);
+		Estado entidadeSalva = repository().getOne(id);
 		if(entidadeSalva == null) {
 			throw new EmptyResultDataAccessException(1);
 		}

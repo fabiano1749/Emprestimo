@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.emprestimoapi.model.entidade.EntidadeBase;
 
 
+@SuppressWarnings("deprecation")
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)

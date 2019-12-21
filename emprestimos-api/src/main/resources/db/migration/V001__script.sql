@@ -67,6 +67,7 @@ CREATE TABLE endereco(
   rua VARCHAR(100) NOT NULL,
   numero VARCHAR(20) NOT NULL,
   bairro VARCHAR(50) NOT NULL,
+  referencia VARCHAR(200),
   complemento VARCHAR(45),			
   id_cidade BIGINT(20) NOT NULL,
   id_entidade BIGINT(20) NOT NULL,
@@ -87,7 +88,7 @@ CREATE TABLE contato (
 CREATE TABLE conta(
   id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL,
-  saldo_inicial decimal NOT NULL,
+  saldo_inicial decimal(10,2) NOT NULL,
   id_status bigint(20) NOT NULL,
   id_usuario bigint(20) NOT NULL, 
   FOREIGN KEY(id_status) REFERENCES status(id),
@@ -103,13 +104,13 @@ CREATE TABLE motivo_operacao(
 CREATE TABLE operacao(
   id bigint(20) PRIMARY KEY AUTO_INCREMENT,
   tipo VARCHAR(20) NOT NULL,
-  data_reg date NOT NULL,
+  data_reg datetime NOT NULL,
   data_operacao date NOT NULL,	
-  valor decimal NOT NULL,
+  valor decimal(10,2) NOT NULL,
   observacao VARCHAR(200),
   id_usuario bigint(20) NOT NULL,
   id_conta bigint(20) NOT NULL,	
-  id_status bigint(20) NOT NULL,
+  id_status bigint(20),
   id_motivo_operacao bigint(20),	
   id_beneficiario bigint(20),
   id_conta_destino bigint(20),	
@@ -129,8 +130,8 @@ CREATE TABLE operacao(
 
 CREATE TABLE parcela(
   id bigint(20) PRIMARY KEY AUTO_INCREMENT,
-  valor_previsto decimal NOT NULL,
-  valor_recebido decimal,
+  valor_previsto decimal(10,2) NOT NULL,
+  valor_recebido decimal(10,2),
   numero int NOT NULL,
   vencimento date NOT NULL,
   recebimento date,
@@ -138,9 +139,41 @@ CREATE TABLE parcela(
   id_emprestimo bigint(20) NOT NULL,
   id_parent bigint(20),
   id_status bigint(20) NOT NULL,
+  id_conta bigint(20),	
   FOREIGN KEY(id_emprestimo) REFERENCES operacao(id),
   FOREIGN KEY(id_parent) REFERENCES parcela(id),
-  FOREIGN KEY(id_status) REFERENCES status(id)
+  FOREIGN KEY(id_status) REFERENCES status(id),
+  FOREIGN KEY(id_conta) REFERENCES conta(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE log_operacao(
+  id bigint(20) PRIMARY KEY AUTO_INCREMENT,
+  id_operacao bigint(20) NOT NULL,
+  id_usuario bigint(20) NOT NULL,
+  data_reg datetime,
+  descricao varchar(500),	
+  FOREIGN KEY(id_operacao) REFERENCES operacao(id),
+  FOREIGN KEY(id_usuario) REFERENCES entidade(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE log_parcela(
+  id bigint(20) PRIMARY KEY AUTO_INCREMENT,
+  id_parcela bigint(20) NOT NULL,
+  id_usuario bigint(20) NOT NULL,
+  data_reg datetime,
+  descricao varchar(500),	
+  FOREIGN KEY(id_parcela) REFERENCES parcela(id),
+  FOREIGN KEY(id_usuario) REFERENCES entidade(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE log_sistema(
+  id bigint(20) PRIMARY KEY AUTO_INCREMENT,
+  id_usuario bigint(20) NOT NULL,
+  data_reg datetime,
+  descricao varchar(500),	
+  FOREIGN KEY(id_usuario) REFERENCES entidade(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

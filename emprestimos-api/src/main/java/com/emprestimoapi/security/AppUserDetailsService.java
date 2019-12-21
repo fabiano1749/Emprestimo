@@ -25,7 +25,6 @@ public class AppUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsername(username);
 		Usuario usuario = usuarioOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha inválidos"));
 		return new User(username, usuario.getSenha(), getPermissoes(usuario));

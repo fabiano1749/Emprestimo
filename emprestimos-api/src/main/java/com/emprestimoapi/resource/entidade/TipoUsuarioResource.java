@@ -1,9 +1,11 @@
 package com.emprestimoapi.resource.entidade;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.emprestimoapi.model.entidade.TipoUsuario;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
 import com.emprestimoapi.repository.Entidade.TipoUsuarioRepository;
@@ -26,4 +28,5 @@ public class TipoUsuarioResource extends BaseResource<TipoUsuario>{
 	public BaseService<TipoUsuario> service() {
 		return service;
 	}
+	
 }

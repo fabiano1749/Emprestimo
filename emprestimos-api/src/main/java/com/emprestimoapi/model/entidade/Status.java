@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 @Entity
 @Table(name="status")
 public class Status extends EntidadeBase{
@@ -121,5 +122,5 @@ public class Status extends EntidadeBase{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 }

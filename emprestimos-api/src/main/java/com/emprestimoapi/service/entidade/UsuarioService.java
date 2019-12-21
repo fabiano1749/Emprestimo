@@ -16,4 +16,11 @@ public class UsuarioService extends BaseService<Usuario>{
 	public BaseRepository<Usuario, Long> repository() {
 		return usuarioRepository;
 	}
+	
+	public void alteraSenha(String senha) {
+		Usuario usuario = getUsuarioLogado();
+		usuario.alteraSenha(senha);
+		usuarioRepository.save(usuario);
+	}
+	
 }

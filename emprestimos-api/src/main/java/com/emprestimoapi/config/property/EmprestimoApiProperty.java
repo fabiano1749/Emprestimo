@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(value="emprestimo") 
 public class EmprestimoApiProperty {
 
+//	private String originPermitida = "http://127.0.0.1:8080";
 	private String originPermitida = "http://localhost:4200";
 	
 	private final Seguranca seguranca = new Seguranca();
@@ -31,7 +32,5 @@ public class EmprestimoApiProperty {
 		public void setEnableHttps(boolean enableHttps) {
 			this.enableHttps = enableHttps;
 		}
-		
 	}
-	
 }

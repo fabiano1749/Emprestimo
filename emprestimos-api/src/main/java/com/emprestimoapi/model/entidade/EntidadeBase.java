@@ -2,9 +2,9 @@ package com.emprestimoapi.model.entidade;
 
 
 public abstract class EntidadeBase {
-
-	public abstract Long getId();
 	
+	public abstract Long getId();
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -21,7 +21,7 @@ public abstract class EntidadeBase {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
+		Status other = (Status) obj;
 		if (getId() == null) {
 			if (other.getId() != null)
 				return false;
@@ -29,5 +29,4 @@ public abstract class EntidadeBase {
 			return false;
 		return true;
 	}
-
 }

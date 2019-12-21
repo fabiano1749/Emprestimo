@@ -3,6 +3,7 @@ package com.emprestimoapi.model.operacao;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -96,8 +97,51 @@ public class Emprestimo extends Operacao{
 		this.parcelas = parcelas;
 	}
 
+	public void calcStatus() {
+		if(statusEmAndamento()) {
+			setStatus(Status.EM_ANDAMENTO);
+		}
+		else if(statusFechado()) {
+			setStatus(Status.FECHADO);
+		}
+		else {
+			setStatus(Status.ABERTO);
+		}
+	}
+	
+	private boolean statusEmAndamento() {
+		List<Parcela>  listaAberto = getParcelas().stream().filter(p -> p.getStatus().equals(Status.ABERTO)).collect(Collectors.toList());
+		List<Parcela>  listaNaoAberto = getParcelas().stream().filter(p -> !p.getStatus().equals(Status.ABERTO)).collect(Collectors.toList());
+		return !listaAberto.isEmpty() && !listaNaoAberto.isEmpty() ;
+	}
+	
+	private boolean statusFechado() {
+		List<Parcela>  lista = getParcelas().stream().filter(p -> p.getStatus().equals(Status.ABERTO)).collect(Collectors.toList());
+		return lista.isEmpty();
+	}
+	
+	
 	public static List<Status> statusUsados() {
-		List<Status> status = Arrays.asList(Status.ABERTO, Status.EM_ANDAMENTO, Status.CANCELADO, Status.FECHADO);
+		List<Status> status = Arrays.asList(Status.EM_ANDAMENTO, Status.CANCELADO, Status.FECHADO);
 		return status;
+	}
+	
+	public Parcela parcelaComMaiorNumero() {
+		if(getParcelas() != null) {
+			return getParcelas().stream().max((a , b) -> a.getNumero().compareTo(b.getNumero())).get();
+		}
+		return null;
+	}
+	
+	public Parcela parcelaComMaiorData() {
+		if(getParcelas() != null) {
+			return getParcelas().stream().max((a , b) -> a.getVencimento().compareTo(b.getVencimento())).get();
+		}
+		return null;
+	}
+	
+	public void setaItensExtrato(List<ItemExtrato> itens) {
+		ItemExtrato item = new ItemExtrato(TipoItemExtrato.SAIDA, "Emprestimo" , getDataOperacao(), getValor(), getConta());
+		itens.add(item);
 	}
 }

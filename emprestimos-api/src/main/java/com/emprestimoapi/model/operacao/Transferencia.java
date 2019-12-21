@@ -1,5 +1,7 @@
 package com.emprestimoapi.model.operacao;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,5 +22,11 @@ public class Transferencia extends Operacao{
 
 	public void setCaixa(Conta caixa) {
 		this.caixa = caixa;
+	}
+
+	@Override
+	public void setaItensExtrato(List<ItemExtrato> itens) {
+		// TODO Auto-generated method stub
+		
 	}
 }

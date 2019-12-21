@@ -47,7 +47,7 @@ public abstract class BaseResource <T extends EntidadeBase>{
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<T> buscarPeloCodigo(@PathVariable Long id){
-		T entidade = repository().findOne(id);
+		T entidade = repository().getOne(id);
 		return entidade != null ? ResponseEntity.ok(entidade) : ResponseEntity.notFound().build();
 	}	
 	
@@ -59,7 +59,7 @@ public abstract class BaseResource <T extends EntidadeBase>{
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long id){
-		repository().delete(id);
+		repository().deleteById(id);
 	}
 
 	public ApplicationEventPublisher getPublisher() {

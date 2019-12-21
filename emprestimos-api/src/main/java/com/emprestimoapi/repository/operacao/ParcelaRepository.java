@@ -6,4 +6,6 @@ import com.emprestimoapi.repository.Entidade.BaseRepository;
 
 public interface ParcelaRepository extends BaseRepository<Parcela, Long>, ParcelaRepositoryQuery{
 
+	
+
 }

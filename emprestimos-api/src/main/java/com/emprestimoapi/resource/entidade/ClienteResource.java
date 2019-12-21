@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
 import com.emprestimoapi.model.entidade.Cliente;
+import com.emprestimoapi.model.entidade.Endereco;
+import com.emprestimoapi.model.entidade.EnderecoContatoCliente;
 import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
 import com.emprestimoapi.repository.Entidade.ClienteRepository;
@@ -56,5 +59,22 @@ public class ClienteResource extends BaseResource<Cliente>{
 	@GetMapping("pesquisa")
 	public List<Cliente> pesquisar(ClienteFilter filtro) {
 		return clienteRepository.filtrar(filtro);
+	}
+	
+	@GetMapping("pesquisaOrdenada")
+	public List<Cliente> entidades() {
+		List<Cliente> clientes = clienteRepository.findAll();
+		clientes.sort( (a, b) -> a.getNome().compareTo(b.getNome()) );
+		return clientes;
+	}
+	
+	@GetMapping("/enderecosCliente/{id}")
+	public List<Endereco> enderecosByIdCliente(@PathVariable("id") Long idCliente){
+		return clienteRepository.findById(idCliente).get().getEnderecos();
+	}
+	
+	@GetMapping("/dadosCliente/{id}")
+	public EnderecoContatoCliente dadosCliente(@PathVariable("id") Long idCliente){
+		return clienteRepository.findById(idCliente).get().enderecoContato();
 	}
 }

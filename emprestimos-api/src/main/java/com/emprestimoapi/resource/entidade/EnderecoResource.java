@@ -1,6 +1,5 @@
 package com.emprestimoapi.resource.entidade;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,6 @@ public class EnderecoResource extends BaseResource<Endereco>{
 	private @Autowired EnderecoRepository enderecoRepository;
 	private @Autowired EnderecoService service;
 	
-
 	@Override
 	public BaseRepository<Endereco, Long> repository() {
 		return enderecoRepository;

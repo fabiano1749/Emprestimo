@@ -12,7 +12,15 @@ public class ParcelaFilter {
 	private String inicio;
 	
 	private String fim;
+	
+	private String username;
+	
+	private Long id;
 
+	private Long idStatus;
+	
+	private Long idConta;
+	
 	public String getCliente() {
 		return cliente;
 	}
@@ -49,7 +57,37 @@ public class ParcelaFilter {
 	public LocalDate dataFim() {
 		return !StringUtils.isEmpty(fim) ? converteData(getFim()) : null;
 	}
-	
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getIdStatus() {
+		return idStatus;
+	}
+
+	public void setIdStatus(Long idStatus) {
+		this.idStatus = idStatus;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getIdConta() {
+		return idConta;
+	}
+
+	public void setIdConta(Long idConta) {
+		this.idConta = idConta;
+	}
+
 }

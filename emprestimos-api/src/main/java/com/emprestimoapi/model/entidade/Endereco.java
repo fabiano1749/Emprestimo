@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,6 +40,8 @@ public class Endereco extends EntidadeBase {
 	
 	@NotNull
 	private String bairro;
+	
+	private String referencia;
 	
 	@ManyToOne
 	@JoinColumn(name="id_cidade")
@@ -102,6 +107,14 @@ public class Endereco extends EntidadeBase {
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
+	
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
 
 	public Cidade getCidade() {
 		return cidade;
@@ -119,4 +132,24 @@ public class Endereco extends EntidadeBase {
 		this.entidade = entidade;
 	}
 
+	@Transient
+	public String resumo() {
+		String endereco = getTipo().toString();
+		if(!StringUtils.isBlank(getCidade().getNome())) {
+			endereco = endereco + getCidade().getNome() + " , ";
+		}
+		if(!StringUtils.isBlank(getBairro())) {
+			endereco = endereco + getBairro() +  " , ";
+		}
+		if(!StringUtils.isBlank(getRua())) {
+			endereco = endereco + getRua() +  " , ";
+		}
+		if(!StringUtils.isBlank(getNumero())) {
+			endereco = endereco + getNumero() +  " , ";
+		}
+		if(!StringUtils.isBlank(getReferencia())) {
+			endereco = endereco + getReferencia() +  " , ";
+		}
+		return  endereco;
+	}
 }

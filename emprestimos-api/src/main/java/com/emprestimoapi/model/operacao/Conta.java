@@ -19,6 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "conta")
@@ -35,6 +36,7 @@ public class Conta extends EntidadeBase{
 	@Column(name="saldo_inicial")
 	private Double saldoInicial;
 	
+	@JsonIgnoreProperties("contas")
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario administrador;

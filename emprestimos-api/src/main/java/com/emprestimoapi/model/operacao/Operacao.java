@@ -2,9 +2,12 @@ package com.emprestimoapi.model.operacao;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -16,12 +19,15 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -34,7 +40,7 @@ public abstract class Operacao extends EntidadeBase{
 	private Long id;
 	
     @Column(name="data_reg")
-	private LocalDate dataRegistro;
+	private LocalDateTime dataRegistro;
     
     @Column(name="data_operacao")
 	private LocalDate dataOperacao;
@@ -56,8 +62,14 @@ public abstract class Operacao extends EntidadeBase{
 	@JoinColumn(name="id_status")
 	private Status status;
 
+	@JsonIgnoreProperties("operacao")
+	@Valid
+	@OneToMany(mappedBy="operacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<LogOperacao> logs;
+	
+	
 	public Operacao() {
-		dataRegistro = LocalDate.now();
+		dataRegistro = LocalDateTime.now();
 		setStatus(Status.ABERTO);
 	}
 	
@@ -69,11 +81,11 @@ public abstract class Operacao extends EntidadeBase{
 		this.id = id;
 	}
 
-	public LocalDate getDataRegistro() {
+	public LocalDateTime getDataRegistro() {
 		return dataRegistro;
 	}
 
-	public void setDataRegistro(LocalDate dataRegistro) {
+	public void setDataRegistro(LocalDateTime dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
 	
@@ -125,8 +137,26 @@ public abstract class Operacao extends EntidadeBase{
 		this.status = status;
 	}
 	
+	public List<LogOperacao> getLogs() {
+		if(logs == null) {
+			logs = new ArrayList<LogOperacao>();
+		}
+		return logs;
+	}
+
+	public void setLogs(List<LogOperacao> logs) {
+		this.logs = logs;
+	}
+
 	public static List<Status> statusUsados() {
 		List<Status> status = Arrays.asList(Status.ABERTO, Status.AUTORIZADO, Status.CANCELADO, Status.FECHADO);
 		return status;
 	}
+	
+	public void geraLog(Usuario usuario, String descricao) {
+		getLogs().add(new LogOperacao(this, usuario, descricao));
+	}	
+	
+	public abstract void setaItensExtrato(List<ItemExtrato> itens);
+	
 }

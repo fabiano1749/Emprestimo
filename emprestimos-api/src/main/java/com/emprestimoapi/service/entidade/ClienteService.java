@@ -1,5 +1,7 @@
 package com.emprestimoapi.service.entidade;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -25,20 +27,20 @@ public class ClienteService extends BaseService<Cliente>{
 	}
 	
 	public Cliente atualizar(Long id, Cliente entidade) {
-		Cliente clienteSalvo = repository().findOne(id);
-		if(clienteSalvo == null) {
+		Optional<Cliente> clienteSalvo = repository().findById(id);
+		if(!clienteSalvo.isPresent()) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		clienteSalvo.getEnderecos().clear();
-		clienteSalvo.getEnderecos().addAll(entidade.getEnderecos());
-		clienteSalvo.getEnderecos().forEach(e -> e.setEntidade(clienteSalvo));
+		clienteSalvo.get().getEnderecos().clear();
+		clienteSalvo.get().getEnderecos().addAll(entidade.getEnderecos());
+		clienteSalvo.get().getEnderecos().forEach(e -> e.setEntidade(clienteSalvo.get()));
 		
-		clienteSalvo.getContatos().clear();
-		clienteSalvo.getContatos().addAll(entidade.getContatos());
-		clienteSalvo.getContatos().forEach(c -> c.setEntidade(clienteSalvo));
+		clienteSalvo.get().getContatos().clear();
+		clienteSalvo.get().getContatos().addAll(entidade.getContatos());
+		clienteSalvo.get().getContatos().forEach(c -> c.setEntidade(clienteSalvo.get()));
 		
 		BeanUtils.copyProperties(entidade, clienteSalvo, "id", "enderecos", "contatos");
-		return repository().save(clienteSalvo);
+		return repository().save(clienteSalvo.get());
 	}
 	
 	

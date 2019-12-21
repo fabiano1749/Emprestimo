@@ -28,6 +28,7 @@ public class Estado extends EntidadeBase{
 	@Size(min=6, max=30)
 	private String nome;
 	
+
 	@NotBlank
 	@Size(min=2, max=2)
 	private String sigla;

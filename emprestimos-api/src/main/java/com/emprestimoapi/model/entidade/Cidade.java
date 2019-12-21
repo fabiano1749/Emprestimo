@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
 @Table(name="cidade")
 public class Cidade extends EntidadeBase{

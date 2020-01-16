@@ -24,6 +24,8 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
+
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
@@ -33,6 +35,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
 @Table(name="operacao")
+@Audited
 public abstract class Operacao extends EntidadeBase{
 
 	@Id
@@ -102,7 +105,12 @@ public abstract class Operacao extends EntidadeBase{
 	}
 
 	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+		if(valor != null && valor.compareTo(BigDecimal.ZERO) < 0) {
+			this.valor = valor.negate();
+		}
+		else {
+			this.valor = valor;
+		}
 	}
 
 	public String getObservacao() {

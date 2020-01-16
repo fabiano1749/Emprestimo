@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.envers.Audited;
+
 
 @Entity
 @DiscriminatorValue("entrada")
+@Audited
 public class Entrada extends Operacao{
 
 	@ManyToOne

@@ -76,7 +76,7 @@ public class ParcelaService extends BaseService<Parcela>{
 	public void renegociarParcela(RenegociarParcela renegociar) {
 		Usuario usuario = getUsuarioLogado();
 		renegociar.setConta(contaRepository.findById(renegociar.getIdConta()).get());
-		Parcela p = parcelaRepository.getOne(renegociar.getIdParcela());
+		Parcela p = parcelaRepository.findById(renegociar.getIdParcela()).get();
 		p.renegociar(renegociar, usuario);
 		p.geraLog(usuario, "Parcela renegociada. Recebida parcialmente.");
 		parcelaRepository.save(p);

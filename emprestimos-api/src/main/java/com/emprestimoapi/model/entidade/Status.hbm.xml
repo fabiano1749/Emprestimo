@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.emprestimoapi.model.entidade.Status" extends="com.emprestimoapi.model.entidade.EntidadeBase" discriminator-value="Status" lazy="false">
+        <property name="id" type="java.lang.Long">
+            <column name="ID" />
+        </property>
+        <property name="numero" type="int">
+            <column name="NUMERO" />
+        </property>
+        <property name="nome" type="java.lang.String">
+            <column name="NOME" />
+        </property>
+        <property name="descricao" type="java.lang.String">
+            <column name="DESCRICAO" />
+        </property>
+    </subclass>
+</hibernate-mapping>

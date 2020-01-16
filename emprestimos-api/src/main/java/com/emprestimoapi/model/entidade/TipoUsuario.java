@@ -14,8 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name="tipo_usuario")
+@Audited
 public class TipoUsuario extends EntidadeBase{
 
 	@Id

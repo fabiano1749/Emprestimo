@@ -7,21 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.envers.Audited;
+
 
 @Entity
 @DiscriminatorValue("transferencia")
+@Audited
 public class Transferencia extends Operacao{
 
 	@ManyToOne
-	@JoinColumn(name="id_caixa")
-	private Conta caixa;
+	@JoinColumn(name="id_contaDestino")
+	private Conta contaDestino;
 
-	public Conta getCaixa() {
-		return caixa;
+	public Conta getContaDestino() {
+		return contaDestino;
 	}
 
-	public void setCaixa(Conta caixa) {
-		this.caixa = caixa;
+	public void setContaDestino(Conta contaDestino) {
+		this.contaDestino = contaDestino;
 	}
 
 	@Override

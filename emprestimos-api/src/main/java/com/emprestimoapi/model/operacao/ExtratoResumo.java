@@ -1,18 +1,21 @@
 package com.emprestimoapi.model.operacao;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ExtratoResumo {
 
 	List<ItemExtrato> itens;
 	
-	private double entradas;
+	private Double entradas;
 	
-	private double saidas;
+	private Double saidas;
 	
-	private double saldo;
+	private Double saldo;
+	
+	private DecimalFormat df = new DecimalFormat("#,###.00");
 
-	public ExtratoResumo(List<ItemExtrato> itens, double entradas, double saidas, double saldo) {
+	public ExtratoResumo(List<ItemExtrato> itens, Double entradas, Double saidas, Double saldo) {
 		this.itens = itens;
 		this.entradas = entradas;
 		this.saidas = saidas;
@@ -23,16 +26,16 @@ public class ExtratoResumo {
 		return itens;
 	}
 
-	public double getEntradas() {
-		return entradas;
+	public String getEntradas() {
+		return this.entradas != null ? df.format(entradas) : "0,00";
 	}
 
-	public double getSaidas() {
-		return saidas;
+	public String getSaidas() {
+		return this.saidas != null ? df.format(saidas) : "0,00";
 	}
 
-	public double getSaldo() {
-		return saldo;
+	public String getSaldo() {
+		return this.saldo != null ? df.format(saldo) : "0,00";
 	}
 	
 }

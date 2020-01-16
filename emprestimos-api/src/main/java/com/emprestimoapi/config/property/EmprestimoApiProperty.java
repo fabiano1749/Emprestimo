@@ -5,7 +5,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(value="emprestimo") 
 public class EmprestimoApiProperty {
 
+//  Produção
 //	private String originPermitida = "http://127.0.0.1:8080";
+	
+//  Desenvolvimento	
 	private String originPermitida = "http://localhost:4200";
 	
 	private final Seguranca seguranca = new Seguranca();

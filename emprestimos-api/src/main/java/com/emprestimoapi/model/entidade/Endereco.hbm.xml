@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.emprestimoapi.model.entidade.Endereco" extends="com.emprestimoapi.model.entidade.EntidadeBase" discriminator-value="Endereco" lazy="false">
+        <property name="id" type="java.lang.Long">
+            <column name="ID" />
+        </property>
+        <many-to-one name="entidade" class="com.emprestimoapi.model.entidade.Entidade" fetch="join">
+            <column name="ENTIDADE" />
+        </many-to-one>
+        <property name="tipo">
+            <column name="TIPO" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.emprestimoapi.model.entidade.TipoEndereco</param>
+            </type>
+        </property>
+        <many-to-one name="cidade" class="com.emprestimoapi.model.entidade.Cidade" fetch="join">
+            <column name="CIDADE" />
+        </many-to-one>
+        <property name="complemento" type="java.lang.String">
+            <column name="COMPLEMENTO" />
+        </property>
+        <property name="numero" type="java.lang.String">
+            <column name="NUMERO" />
+        </property>
+        <property name="bairro" type="java.lang.String">
+            <column name="BAIRRO" />
+        </property>
+        <property name="referencia" type="java.lang.String">
+            <column name="REFERENCIA" />
+        </property>
+        <property name="cep" type="java.lang.String">
+            <column name="CEP" />
+        </property>
+        <property name="rua" type="java.lang.String">
+            <column name="RUA" />
+        </property>
+    </subclass>
+</hibernate-mapping>

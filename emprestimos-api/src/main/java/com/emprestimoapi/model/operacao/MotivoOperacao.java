@@ -10,6 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.emprestimoapi.model.entidade.EntidadeBase;
@@ -20,6 +21,7 @@ import com.emprestimoapi.model.entidade.EntidadeBase;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
 @Table(name = "motivo_operacao")
+@Audited
 public abstract class MotivoOperacao extends EntidadeBase{
 
 	

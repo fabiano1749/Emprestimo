@@ -21,6 +21,7 @@ import com.emprestimoapi.model.entidade.Cliente;
 import com.emprestimoapi.model.entidade.Endereco;
 import com.emprestimoapi.model.entidade.EnderecoContatoCliente;
 import com.emprestimoapi.model.entidade.Status;
+import com.emprestimoapi.model.entidade.resumoConsultas.ResumoCliente;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
 import com.emprestimoapi.repository.Entidade.ClienteRepository;
 import com.emprestimoapi.repository.filter.ClienteFilter;
@@ -57,8 +58,8 @@ public class ClienteResource extends BaseResource<Cliente>{
 	}
 	
 	@GetMapping("pesquisa")
-	public List<Cliente> pesquisar(ClienteFilter filtro) {
-		return clienteRepository.filtrar(filtro);
+	public List<ResumoCliente> pesquisar(ClienteFilter filtro) {
+		return clienteRepository.resumoCliente(filtro);
 	}
 	
 	@GetMapping("pesquisaOrdenada")

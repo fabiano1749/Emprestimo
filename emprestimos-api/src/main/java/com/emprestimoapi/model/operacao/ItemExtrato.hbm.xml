@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.emprestimoapi.model.operacao.ItemExtrato" table="ITEMEXTRATO">
+        <id name="tipo" type="org.hibernate.type.EnumType">
+            <column name="TIPO" />
+            <generator class="assigned" />
+        </id>
+        <property name="origem" type="java.lang.String">
+            <column name="ORIGEM" />
+        </property>
+        <property name="data" type="java.time.LocalDate">
+            <column name="DATA" />
+        </property>
+        <property name="valor" type="java.math.BigDecimal">
+            <column name="VALOR" />
+        </property>
+        <property name="conta" type="java.lang.String">
+            <column name="CONTA" />
+        </property>
+    </class>
+</hibernate-mapping>

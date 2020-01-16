@@ -15,12 +15,15 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
+
 import com.emprestimoapi.model.entidade.Cliente;
 import com.emprestimoapi.model.entidade.Status;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @DiscriminatorValue("emprestimo")
+@Audited
 public class Emprestimo extends Operacao{
 	
 	@NotNull
@@ -90,6 +93,9 @@ public class Emprestimo extends Operacao{
 	}
 	
 	public List<Parcela> getParcelas() {
+		if(parcelas != null && !parcelas.isEmpty()) {
+			parcelas.sort((p1, p2) -> p1.getVencimento().compareTo(p2.getVencimento()));
+		}
 		return parcelas;
 	}
 
@@ -122,7 +128,7 @@ public class Emprestimo extends Operacao{
 	
 	
 	public static List<Status> statusUsados() {
-		List<Status> status = Arrays.asList(Status.EM_ANDAMENTO, Status.CANCELADO, Status.FECHADO);
+		List<Status> status = Arrays.asList(Status.EM_ANDAMENTO, Status.CANCELADO, Status.FECHADO, Status.ABERTO);
 		return status;
 	}
 	

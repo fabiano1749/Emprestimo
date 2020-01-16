@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.emprestimoapi.model.entidade.Usuario" extends="com.emprestimoapi.model.entidade.Entidade" discriminator-value="Usuario" lazy="false">
+        <property name="senha" type="java.lang.String">
+            <column name="SENHA" />
+        </property>
+        <many-to-one name="tipo" class="com.emprestimoapi.model.entidade.TipoUsuario" fetch="join">
+            <column name="TIPO" />
+        </many-to-one>
+        <list name="contas" inverse="false" table="CONTA" lazy="true">
+            <key>
+                <column name="SENHA" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.emprestimoapi.model.operacao.Conta" />
+        </list>
+        <list name="clientes" inverse="false" table="CLIENTE" lazy="true">
+            <key>
+                <column name="SENHA" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.emprestimoapi.model.entidade.Cliente" />
+        </list>
+        <property name="username" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+    </subclass>
+</hibernate-mapping>

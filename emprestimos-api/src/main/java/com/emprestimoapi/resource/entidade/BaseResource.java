@@ -47,7 +47,7 @@ public abstract class BaseResource <T extends EntidadeBase>{
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<T> buscarPeloCodigo(@PathVariable Long id){
-		T entidade = repository().getOne(id);
+		T entidade = repository().findById(id).get();
 		return entidade != null ? ResponseEntity.ok(entidade) : ResponseEntity.notFound().build();
 	}	
 	

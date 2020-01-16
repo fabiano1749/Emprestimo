@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.emprestimoapi.model.entidade.Cliente;
 import com.emprestimoapi.model.entidade.Endereco;
+import com.emprestimoapi.model.entidade.resumoConsultas.ResumoCliente;
 import com.emprestimoapi.repository.filter.ClienteFilter;
 
 public class ClienteRepositoryImpl implements ClienteRepositoryQuery{
@@ -35,6 +36,29 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery{
 		criteria.where(predicates);
 		
 		TypedQuery<Cliente> query = manager.createQuery(criteria);
+		return query.getResultList();
+	}
+	
+	public List<ResumoCliente> resumoCliente(ClienteFilter filtro) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<ResumoCliente> criteria = builder.createQuery(ResumoCliente.class);
+		Root<Cliente> root = criteria.from(Cliente.class);
+		Join<Cliente, Endereco> endereco = root.joinList("enderecos", JoinType.LEFT);
+		
+		Predicate[] predicates = criarRestricoes(filtro, builder, root, endereco);
+		criteria.where(predicates);
+		
+		criteria.select(builder.construct(ResumoCliente.class, 
+				root.get("id"),
+				root.get("nome"),
+				root.get("usuario").get("id"),
+				root.get("usuario").get("nome"),
+				root.get("status").get("id"),
+				root.get("status").get("nome")
+				));
+		
+		criteria.orderBy(builder.asc(root.get("nome")));
+		TypedQuery<ResumoCliente> query = manager.createQuery(criteria);
 		return query.getResultList();
 	}
 

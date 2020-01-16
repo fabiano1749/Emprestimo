@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name="permissao")
+@Audited
 public class Permissao extends EntidadeBase {
 	
 	@Id

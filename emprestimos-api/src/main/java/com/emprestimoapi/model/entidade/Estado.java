@@ -12,12 +12,14 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="estado")
+@Audited
 public class Estado extends EntidadeBase{
 	
 	@Id

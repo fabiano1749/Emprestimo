@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @DiscriminatorValue("cliente")
+@Audited
 public class Cliente extends Entidade{
 	
 	@Column(name="nome_comercio")

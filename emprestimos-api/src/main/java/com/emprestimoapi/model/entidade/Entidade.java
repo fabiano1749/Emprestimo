@@ -23,12 +23,15 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo", discriminatorType=DiscriminatorType.STRING)
 @Table(name="entidade")
+@Audited
 public abstract class Entidade extends EntidadeBase{
 
 	@Id

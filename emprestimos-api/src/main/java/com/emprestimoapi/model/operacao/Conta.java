@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.emprestimoapi.model.entidade.EntidadeBase;
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "conta")
+@Audited
 public class Conta extends EntidadeBase{
 
 	@Id

@@ -11,11 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Usuario;
 
 @Entity
 @Table(name="log_sistema")
+@Audited
 public class LogSistema extends EntidadeBase{
 
 	@Id

@@ -8,9 +8,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+
 
 @Entity
 @Table(name="status")
+@Audited
 public class Status extends EntidadeBase{
 
 	public static final Long STATUS_ABERTO = 1L;

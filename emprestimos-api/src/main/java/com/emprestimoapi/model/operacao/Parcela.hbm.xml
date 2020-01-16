@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.emprestimoapi.model.operacao.Parcela" extends="com.emprestimoapi.model.entidade.EntidadeBase" discriminator-value="Parcela" lazy="false">
+        <property name="id" type="java.lang.Long">
+            <column name="ID" />
+        </property>
+        <one-to-one name="parent" class="com.emprestimoapi.model.operacao.Parcela"></one-to-one>
+        <property name="observacao" type="java.lang.String">
+            <column name="OBSERVACAO" />
+        </property>
+        <property name="valorPrevisto" type="java.math.BigDecimal">
+            <column name="VALORPREVISTO" />
+        </property>
+        <property name="numero" type="java.lang.Integer">
+            <column name="NUMERO" />
+        </property>
+        <many-to-one name="emprestimo" class="com.emprestimoapi.model.operacao.Emprestimo" fetch="join">
+            <column name="EMPRESTIMO" />
+        </many-to-one>
+        <property name="recebimento" type="java.time.LocalDate">
+            <column name="RECEBIMENTO" />
+        </property>
+        <many-to-one name="conta" class="com.emprestimoapi.model.operacao.Conta" fetch="join">
+            <column name="CONTA" />
+        </many-to-one>
+        <property name="vencimento" type="java.time.LocalDate">
+            <column name="VENCIMENTO" />
+        </property>
+        <list name="logs" inverse="false" table="LOGPARCELA" lazy="true">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.emprestimoapi.model.operacao.LogParcela" />
+        </list>
+        <property name="valorRecebido" type="java.math.BigDecimal">
+            <column name="VALORRECEBIDO" />
+        </property>
+        <many-to-one name="status" class="com.emprestimoapi.model.entidade.Status" fetch="join">
+            <column name="STATUS" />
+        </many-to-one>
+    </subclass>
+</hibernate-mapping>

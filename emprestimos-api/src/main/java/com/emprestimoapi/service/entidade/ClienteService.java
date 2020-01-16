@@ -31,6 +31,7 @@ public class ClienteService extends BaseService<Cliente>{
 		if(!clienteSalvo.isPresent()) {
 			throw new EmptyResultDataAccessException(1);
 		}
+		
 		clienteSalvo.get().getEnderecos().clear();
 		clienteSalvo.get().getEnderecos().addAll(entidade.getEnderecos());
 		clienteSalvo.get().getEnderecos().forEach(e -> e.setEntidade(clienteSalvo.get()));
@@ -39,7 +40,8 @@ public class ClienteService extends BaseService<Cliente>{
 		clienteSalvo.get().getContatos().addAll(entidade.getContatos());
 		clienteSalvo.get().getContatos().forEach(c -> c.setEntidade(clienteSalvo.get()));
 		
-		BeanUtils.copyProperties(entidade, clienteSalvo, "id", "enderecos", "contatos");
+		BeanUtils.copyProperties(entidade, clienteSalvo.get(), "id", "enderecos", "contatos");
+		
 		return repository().save(clienteSalvo.get());
 	}
 	

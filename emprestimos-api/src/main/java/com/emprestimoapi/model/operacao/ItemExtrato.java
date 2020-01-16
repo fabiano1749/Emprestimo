@@ -1,6 +1,7 @@
 package com.emprestimoapi.model.operacao;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -53,6 +54,12 @@ public class ItemExtrato {
 		return tipo.equals(TipoItemExtrato.ENTRADA) ? this.valor : this.valor.multiply(new BigDecimal(-1));
 	}
 
+	public String getValorFormat() {
+		DecimalFormat df = new DecimalFormat("#,###.00");
+		return df.format(getValor());
+	}
+	
+	
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}

@@ -13,11 +13,13 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.envers.Audited;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="endereco")
+@Audited
 public class Endereco extends EntidadeBase {
 	
 	@Id

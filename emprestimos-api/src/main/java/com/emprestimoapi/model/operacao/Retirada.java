@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.envers.Audited;
+
 
 @Entity
 @DiscriminatorValue("retirada")
+@Audited
 public class Retirada extends Operacao{
 	
 	@ManyToOne

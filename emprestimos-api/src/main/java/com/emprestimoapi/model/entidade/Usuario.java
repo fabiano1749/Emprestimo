@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.envers.Audited;
 
 import com.emprestimoapi.model.operacao.Conta;
 import com.emprestimoapi.security.util.GeradorSenha;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @DiscriminatorValue("usuario")
+@Audited
 public class Usuario extends Entidade{
 		
 	@NotNull

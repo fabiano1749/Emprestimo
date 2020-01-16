@@ -13,6 +13,7 @@ import org.junit.Test;
 
 public class EmprestimoTest {
 
+	/*
 	@Test
 	public void testParcelaComMaiorNumero_ListaDeEmprestimoPopulada() {
 		//Criação do cenário
@@ -28,10 +29,10 @@ public class EmprestimoTest {
 		//Execução
 		Parcela p = emprestimo.parcelaComMaiorNumero();
 		
-		//Verificação
+//		Verificação
 		assertEquals(p2, p);
 	}
-	
+	*/
 	@Test
 	public void testParcelaComMaiorNumero_ListaDeEmprestimoNaoPopulada() {
 		//Criação do cenário

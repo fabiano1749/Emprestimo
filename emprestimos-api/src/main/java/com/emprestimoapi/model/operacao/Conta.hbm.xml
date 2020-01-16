@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.emprestimoapi.model.operacao.Conta" extends="com.emprestimoapi.model.entidade.EntidadeBase" discriminator-value="Conta" lazy="false">
+        <property name="id" type="java.lang.Long">
+            <column name="ID" />
+        </property>
+        <many-to-one name="administrador" class="com.emprestimoapi.model.entidade.Usuario" fetch="join">
+            <column name="ADMINISTRADOR" />
+        </many-to-one>
+        <property name="nome" type="java.lang.String">
+            <column name="NOME" />
+        </property>
+        <property name="saldoInicial" type="java.lang.Double">
+            <column name="SALDOINICIAL" />
+        </property>
+        <many-to-one name="status" class="com.emprestimoapi.model.entidade.Status" fetch="join">
+            <column name="STATUS" />
+        </many-to-one>
+    </subclass>
+</hibernate-mapping>

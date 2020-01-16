@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/01/2020 14:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.emprestimoapi.model.entidade.Entidade" extends="com.emprestimoapi.model.entidade.EntidadeBase" discriminator-value="Entidade" lazy="false" abstract="true">
+        <property name="id" type="java.lang.Long">
+            <column name="ID" />
+        </property>
+        <property name="observacao" type="java.lang.String">
+            <column name="OBSERVACAO" />
+        </property>
+        <list name="contatos" inverse="false" table="CONTATO" lazy="true">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.emprestimoapi.model.entidade.Contato" />
+        </list>
+        <list name="enderecos" inverse="false" table="ENDERECO" lazy="true">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.emprestimoapi.model.entidade.Endereco" />
+        </list>
+        <property name="dataRegistro" type="java.util.Date">
+            <column name="DATAREGISTRO" />
+        </property>
+        <property name="cpf" type="java.lang.String">
+            <column name="CPF" />
+        </property>
+        <property name="nome" type="java.lang.String">
+            <column name="NOME" />
+        </property>
+        <many-to-one name="status" class="com.emprestimoapi.model.entidade.Status" fetch="join">
+            <column name="STATUS" />
+        </many-to-one>
+    </subclass>
+</hibernate-mapping>

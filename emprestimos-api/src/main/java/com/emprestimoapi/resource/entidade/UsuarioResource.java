@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emprestimoapi.event.RecursoCriadoEvent;
-import com.emprestimoapi.model.entidade.LogSistema;
 import com.emprestimoapi.model.entidade.Status;
 import com.emprestimoapi.model.entidade.Usuario;
 import com.emprestimoapi.repository.Entidade.BaseRepository;
-import com.emprestimoapi.repository.Entidade.LogSistemaRepository;
 import com.emprestimoapi.repository.Entidade.UsuarioRepository;
 import com.emprestimoapi.security.util.GeradorSenha;
 import com.emprestimoapi.service.entidade.BaseService;
@@ -33,7 +31,6 @@ public class UsuarioResource extends BaseResource<Usuario>{
 
 	private @Autowired UsuarioRepository usuarioRepository;
 	private @Autowired UsuarioService service;
-	private @Autowired LogSistemaRepository logSistemaRepository;
 	
 
 	@Override
@@ -54,9 +51,7 @@ public class UsuarioResource extends BaseResource<Usuario>{
 	@PostMapping
 	public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario, HttpServletResponse response){
 		usuario.setSenha(GeradorSenha.gerarSenha(usuario.getSenha()));
-		Usuario entidadeSalva = repository().save(usuario);
-		LogSistema log = new LogSistema(service.getUsuarioLogado(), "Criação do usuário: " + usuario.getNome());
-		logSistemaRepository.save(log);
+		Usuario entidadeSalva = service.salvar(usuario);
 		getPublisher().publishEvent(new RecursoCriadoEvent(this, response, entidadeSalva.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(entidadeSalva);
 	}

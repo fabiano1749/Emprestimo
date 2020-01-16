@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
 
 import com.emprestimoapi.model.entidade.EntidadeBase;
 import com.emprestimoapi.model.entidade.Status;
@@ -29,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="parcela")
+@Audited
 public class Parcela extends EntidadeBase{
 
 	@Id
@@ -103,7 +105,12 @@ public class Parcela extends EntidadeBase{
 	}
 
 	public void setValorPrevisto(BigDecimal valorPrevisto) {
-		this.valorPrevisto = valorPrevisto;
+		if(valorPrevisto != null && valorPrevisto.compareTo(BigDecimal.ZERO) < 0) {
+			this.valorPrevisto = valorPrevisto.negate();
+		}
+		else {
+			this.valorPrevisto = valorPrevisto;
+		}
 	}
 
 	public BigDecimal getValorRecebido() {
@@ -111,7 +118,12 @@ public class Parcela extends EntidadeBase{
 	}
 
 	public void setValorRecebido(BigDecimal valorRecebido) {
-		this.valorRecebido = valorRecebido;
+		if(valorRecebido != null && valorRecebido.compareTo(BigDecimal.ZERO) < 0) {
+			this.valorRecebido = valorRecebido.negate();
+		}
+		else {
+			this.valorRecebido = valorRecebido;
+		}
 	}
 
 	public Integer getNumero() {

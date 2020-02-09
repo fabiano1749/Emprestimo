@@ -46,7 +46,7 @@ public class Extrato {
 
 	public List<ItemExtrato> getItensOrdenados() {
 		if(Optional.ofNullable(itens).isPresent()) {
-			return itens.stream().sorted((i1, i2) -> i1.getData().compareTo(i2.getData())).collect(Collectors.toList());
+			return itens.stream().sorted((i1, i2) -> i1.getDataLocalDate().compareTo(i2.getDataLocalDate())).collect(Collectors.toList());
 		}
 		return itens;
 	}

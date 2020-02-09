@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,7 +23,6 @@ public class Cidade extends EntidadeBase{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	@Size(min=5, max=50)
 	private String nome;
 	

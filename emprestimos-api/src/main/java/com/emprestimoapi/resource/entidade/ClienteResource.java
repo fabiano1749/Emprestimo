@@ -65,7 +65,7 @@ public class ClienteResource extends BaseResource<Cliente>{
 	@GetMapping("pesquisaOrdenada")
 	public List<Cliente> entidades() {
 		List<Cliente> clientes = clienteRepository.findAll();
-		clientes.sort( (a, b) -> a.getNome().compareTo(b.getNome()) );
+		clientes.sort( (a, b) -> a.getNome().toLowerCase().compareTo(b.getNome().toLowerCase()) );
 		return clientes;
 	}
 	

@@ -7,7 +7,7 @@ CREATE TABLE auditoria (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE cidade_aud (
-  id bigint(20) NOT NULL,
+  id int(20) NOT NULL,
   rev int(11) NOT NULL,
   revtype tinyint(4) DEFAULT NULL,
   nome varchar(255) DEFAULT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE cidade_aud (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE conta_aud (
-  id bigint(20) NOT NULL,
+  id int(20) NOT NULL,
   rev int(11) NOT NULL,
   revtype tinyint(4) DEFAULT NULL,
   nome varchar(255) DEFAULT NULL,
@@ -77,8 +77,8 @@ CREATE TABLE estado_aud (
   id bigint(20) NOT NULL,
   rev int(11) NOT NULL,
   revtype tinyint(4) DEFAULT NULL,
-  nome varchar(255) DEFAULT NULL,
-  sigla varchar(255) DEFAULT NULL,
+  nome varchar(30) DEFAULT NULL,
+  sigla varchar(2) DEFAULT NULL,
   PRIMARY KEY (id,rev)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -199,5 +199,5 @@ CREATE TABLE tipo_usuario_aud (
   nome varchar(255) DEFAULT NULL,
   id_status bigint(20) DEFAULT NULL,
   PRIMARY KEY (id,rev)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

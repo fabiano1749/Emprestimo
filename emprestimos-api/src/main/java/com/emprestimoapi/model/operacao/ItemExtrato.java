@@ -71,4 +71,8 @@ public class ItemExtrato {
 	public void setConta(String conta) {
 		this.conta = conta;
 	}
+	
+	public LocalDate getDataLocalDate() {
+		return this.data;
+	}
 }

@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,18 +25,16 @@ public class Estado extends EntidadeBase{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@Size(min=6, max=30)
 	private String nome;
 	
 
-	@NotBlank
 	@Size(min=2, max=2)
 	private String sigla;
 
 	@JsonIgnoreProperties("estado")
 	@Valid
-	@OneToMany(mappedBy= "estado", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy= "estado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Cidade> cidades;
 	
 	public Estado() {
